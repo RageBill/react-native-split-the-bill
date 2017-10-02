@@ -25,7 +25,10 @@ export default class MainScreen extends Component {
   	return(
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text h1>Split The Bill</Text>
+          <Text h1 style={{ color: 'white', textShadowColor: 'black', textShadowRadius: 20, textShadowOffset: {
+            width: 4,
+            height: 4
+          } }}>Split The Bill</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button
@@ -33,11 +36,11 @@ export default class MainScreen extends Component {
             large
             borderRadius={100}
             fontSize={20}
-            icon={{name: 'attach-money', size: 30}}
-            buttonStyle={{backgroundColor: 'steelblue'}}
-            textStyle={{textAlign: 'center'}}
-            title={'Calculate & Pay'}
-            containerViewStyle={{borderRadius: 20, width: '60%'}}
+            icon={{name: 'attach-money', size: 30, color: 'steelblue'}}
+            buttonStyle={{backgroundColor: 'white'}}
+            textStyle={{textAlign: 'center', color: 'steelblue' }}
+            title={'Calculate'}
+            containerViewStyle={{borderRadius: 20, width: '50%'}}
             onPress={() => navigate('Split')}
           />
           <Button
@@ -45,11 +48,11 @@ export default class MainScreen extends Component {
             large
             borderRadius={100}
             fontSize={20}
-            icon={{name: 'exit-to-app', size: 30}}
-            buttonStyle={{backgroundColor: 'steelblue'}}
-            textStyle={{textAlign: 'center'}}
+            icon={{name: 'exit-to-app', size: 30, color: 'steelblue'}}
+            buttonStyle={{backgroundColor: 'white'}}
+            textStyle={{textAlign: 'center', color: 'steelblue'}}
             title={'Exit App'}
-            containerViewStyle={{borderRadius: 20, width: '60%'}}
+            containerViewStyle={{borderRadius: 20, width: '50%'}}
             onPress={() => Alert.alert(
               'Exit Application',
               'Are you sure you want to exit?',
@@ -72,14 +75,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'steelblue',
   },
   buttonContainer: {
     flex: 2,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'steelblue',
     width: '100%',
   },
   headerContainer: {
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'steelblue',
     width: '100%',
   }
 });

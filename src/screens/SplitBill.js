@@ -4,16 +4,15 @@ import {
   View
 } from 'react-native';
 import {
-  Button,
-  Text,
   Icon
 } from 'react-native-elements';
+import SplitInputs from '../components/SplitInputs'
 import { StackNavigator } from 'react-navigation';
 
 export default class SplitBill extends Component {
   
   static navigationOptions = ({navigation}) => ({
-    title: 'Home',
+    title: 'Splitting The Bill',
     headerRight: <Icon name='dollar-bill' color='steelblue' type='foundation' containerStyle={{ paddingRight: 10 }}/>,
     headerTintColor: 'steelblue'
   })
@@ -21,7 +20,9 @@ export default class SplitBill extends Component {
   render(){
   	return(
   	  <View style={styles.container}>
-        <Text>Splitting the Bill here!</Text>
+        <SplitInputs/>
+        <View style={{ flex: 4 }}>
+        </View>
       </View>
     )
   }
@@ -33,6 +34,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'steelblue',
   }
 });
