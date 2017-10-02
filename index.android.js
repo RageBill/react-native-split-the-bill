@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import MainScene from './src/scenes/MainScene'
+import MainScreen from './src/screens/MainScreen';
+import SplitBill from './src/screens/SplitBill';
+import { StackNavigator } from 'react-navigation';
 
-export default class SplitTheBill extends Component {
-  render() {
-    return (
-      <MainScene/>
-    );
-  }
-}
+const SplitTheBill = StackNavigator({
+  Main: { screen: MainScreen },
+  Split: { screen: SplitBill },
+});
 
 AppRegistry.registerComponent('SplitTheBill', () => SplitTheBill);
