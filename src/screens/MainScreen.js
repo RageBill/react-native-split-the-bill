@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'steelblue',
+    backgroundColor: '#5696BC',
   },
   buttonContainer: {
     flex: 2,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'steelblue',
+    backgroundColor: '#5696BC',
     width: '100%',
   },
   headerContainer: {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'steelblue',
+    backgroundColor: '#5696BC',
     width: '100%',
   }
 });

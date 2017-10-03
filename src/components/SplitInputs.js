@@ -1,24 +1,57 @@
 import React, { Component } from 'react';
 import {
-  View
+  View,
+  StyleSheet
 } from 'react-native';
 import {
   Icon,
-  Divider
+  Divider,
+  FormLabel,
+  FormInput,
+  FormValidationMessage
 } from 'react-native-elements';
-import TextField from 'react-native-md-textinput';
 
 export default class SplitInputs extends Component {
 
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      error: false,
+      amount: ''
+    };
+  }
+
+
+
   render(){
+    const normalColor = '#FFFFFF';
+    const errorColor = '#F39D41';
+
   	return(
-  	  <View style={{ flex: 1, width: '100%', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
-        <TextField
-          label='Amount To Split'
-          highlightColor='skyblue'
-          wrapperStyle={{ width: '60%' }}
+  	  <View>
+        <FormLabel labelStyle={{color: this.state.error? errorColor : normalColor}}>Amount To Split</FormLabel>
+        <FormInput 
+          defaultValue={this.state.amount}
+          inputStyle={{color: this.state.error? errorColor: normalColor}}
+          keyboardType={'numeric'}
+          selectionColor={this.state.error? errorColor: normalColor}
+          underlineColorAndroid={this.state.error? errorColor : normalColor}
+          onChangeText={(amount) => {
+            if(amount >= 0){
+              this.setState({amount: amount, error: false});
+            } else {
+              this.setState({amount: amount, error: true});
+            }
+          }}
+          shake={this.state.error}
         />
-        <Divider style={{ backgroundColor: 'gainsboro', width: '100%', height: 2 }}/>
+        <FormValidationMessage 
+          containerStyle={{display: this.state.error? 'flex' : 'none'}}
+          labelStyle={{color: this.state.error? errorColor : normalColor}}
+        >
+          {'Amount has to be non-negative number.'}
+        </FormValidationMessage>
       </View>
     )
   }
