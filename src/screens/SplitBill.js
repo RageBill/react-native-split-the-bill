@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import {
   Icon
@@ -9,6 +10,10 @@ import {
 import SplitInputs from '../components/SplitInputs';
 import SplitResults from '../components/SplitResults';
 import { StackNavigator } from 'react-navigation';
+
+// Colors
+const primary1 = '#FFFFFF'; // White
+const primary2 = '#6296F9'; // Blue
 
 export default class SplitBill extends Component {
 
@@ -27,16 +32,17 @@ export default class SplitBill extends Component {
   
   static navigationOptions = ({navigation}) => ({
     title: 'Splitting The Bill',
-    headerRight: <Icon name='dollar-bill' color='steelblue' type='foundation' containerStyle={{ paddingRight: 10 }}/>,
-    headerTintColor: 'steelblue'
+    headerRight: <Icon name='dollar-bill' color={primary1} type='foundation' containerStyle={{ paddingRight: 10, backgroundColor: primary2 }}/>,
+    headerTintColor: primary1,
+    headerStyle: { backgroundColor: primary2 }
   })
 
   render(){
   	return(
-  	  <View style={styles.container}>
+  	  <ScrollView style={styles.container}>
         <SplitInputs style={styles.splitInputs} handleSubmit={this.handleSubmit}/>
         <SplitResults style={styles.results} info={this.state}/>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -45,16 +51,16 @@ const styles = StyleSheet.create({
   // Outermost container
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: primary1,
   },
   // Container for inputs for splitting bill
   splitInputs: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: primary1,
   },
   // Container for showing results
   results: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: primary1,
   }
 });
