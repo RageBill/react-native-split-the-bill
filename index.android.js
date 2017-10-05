@@ -5,8 +5,8 @@ import SplitBill from './src/screens/SplitBill';
 import { StackNavigator } from 'react-navigation';
 
 const SplitTheBill = StackNavigator({
-  Main: { screen: MainScreen },
-  Split: { screen: SplitBill },
+  Main: { screen: MainScreen }, // Main entry screen
+  Split: { screen: SplitBill }, // Screen for inputs & split bill
 });
 
 AppRegistry.registerComponent('SplitTheBill', () => SplitTheBill);

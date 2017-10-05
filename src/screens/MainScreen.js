@@ -36,7 +36,7 @@ export default class MainScreen extends Component {
             large
             borderRadius={100}
             fontSize={20}
-            icon={{name: 'attach-money', size: 30, color: 'steelblue'}}
+            icon={{name: 'dollar', size: 30, color: 'steelblue', type: 'foundation'}}
             buttonStyle={{backgroundColor: 'white'}}
             textStyle={{textAlign: 'center', color: 'steelblue' }}
             title={'Calculate'}
@@ -70,6 +70,7 @@ export default class MainScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  // Outermost container
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#5696BC',
   },
+  // Container for the buttons
   buttonContainer: {
     flex: 2,
     flexDirection: 'column',
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5696BC',
     width: '100%',
   },
+  // Container for the title
   headerContainer: {
     flex: 1,
     flexDirection: 'column',

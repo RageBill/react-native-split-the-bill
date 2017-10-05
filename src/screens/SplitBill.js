@@ -6,10 +6,24 @@ import {
 import {
   Icon
 } from 'react-native-elements';
-import SplitInputs from '../components/SplitInputs'
+import SplitInputs from '../components/SplitInputs';
+import SplitResults from '../components/SplitResults';
 import { StackNavigator } from 'react-navigation';
 
 export default class SplitBill extends Component {
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      amount: 0,
+      people: 0
+    };
+  }
+
+  handleSubmit = (amount, people) => {
+    this.setState({amount: amount, people: people});
+  }
   
   static navigationOptions = ({navigation}) => ({
     title: 'Splitting The Bill',
@@ -20,20 +34,27 @@ export default class SplitBill extends Component {
   render(){
   	return(
   	  <View style={styles.container}>
-        <SplitInputs/>
-        <View style={{ flex: 4 }}>
-        </View>
+        <SplitInputs style={styles.splitInputs} handleSubmit={this.handleSubmit}/>
+        <SplitResults style={styles.results} info={this.state}/>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  // Outermost container
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#5696BC',
+    backgroundColor: 'white',
+  },
+  // Container for inputs for splitting bill
+  splitInputs: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  // Container for showing results
+  results: {
+    flex: 1,
+    backgroundColor: 'white',
   }
 });
