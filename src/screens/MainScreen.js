@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View
-} from 'react-native';
-import {
-  Button,
-  Text,
-  Icon
-} from 'react-native-elements';
-import colors from 'Colors';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, Icon } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 import Title from '../components/Title';
 import MainScreenButtons from '../components/MainScreenButtons';
-import { StackNavigator } from 'react-navigation';
+import colors from 'Colors';
+
 
 export default class MainScreen extends Component {
 
+  // Navigation options for this page
   static navigationOptions = ({navigation}) => ({
     title: 'Home',
     headerRight: <Icon name='home' color={ colors.primary1 } containerStyle={{ paddingRight: 10, backgroundColor: colors.primary2 }}/>,

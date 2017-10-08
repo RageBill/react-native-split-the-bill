@@ -1,32 +1,14 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView
-} from 'react-native';
-import {
-  Icon
-} from 'react-native-elements';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 import SplitInputs from '../components/SplitInputs';
 import SplitResults from '../components/SplitResults';
-import { StackNavigator } from 'react-navigation';
 import colors from 'Colors';
 
 export default class SplitBill extends Component {
 
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      amount: 0,
-      people: 0
-    };
-  }
-
-  handleSubmit = (amount, people) => {
-    this.setState({amount: amount, people: people});
-  }
-  
+  // Navigation options for this page
   static navigationOptions = ({navigation}) => ({
     title: 'Splitting The Bill',
     headerRight: <Icon name='dollar-bill' color={colors.primary1} type='foundation' containerStyle={{ paddingRight: 10, backgroundColor: colors.primary2 }}/>,
@@ -34,11 +16,61 @@ export default class SplitBill extends Component {
     headerStyle: { backgroundColor: colors.primary2 }
   })
 
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      error1: false, // Error for amount to split
+      error2: false, // Error for number of people
+      amount: '', // Amount of bill to split
+      people: '', // Number of people to split amongst
+      calculate: false // Whether to calculate and show the result
+    };
+  }
+
+  // Handling submit button click
+  handleSubmit = () => {
+    this.setState({calculate: true});
+  }
+
+  // State changes when input for amount changes
+  onAmountInput = (amount) => {
+    if(amount >= 0){
+      this.setState({amount: amount, error1: false, calculate: false});
+    } else {
+      this.setState({amount: amount, error1: true, calculate: false});
+    }
+  }
+
+  // State changes when input for number of people changes
+  onPeopleInput = (people) => {
+    if(people >= 1 || people == ''){
+      this.setState({people: people, error2: false, calculate: false});
+    } else {
+      this.setState({people: people, error2: true, calculate: false});
+    }
+  }
+
+  // Done button pressed for calculation
+  doneCalculate = () => {
+    this.setState({calculate: false});
+  }
+
   render(){
   	return(
   	  <ScrollView style={styles.container}>
-        <SplitInputs style={styles.splitInputs} handleSubmit={this.handleSubmit}/>
-        <SplitResults style={styles.results} info={this.state}/>
+        <SplitInputs 
+          style={styles.splitInputs} 
+          info={this.state} 
+          onAmountInput={this.onAmountInput} 
+          onPeopleInput={this.onPeopleInput}
+        />
+        <SplitResults 
+          style={styles.results} 
+          info={this.state}
+          handleSubmit={this.handleSubmit}
+          doneCalculate={this.doneCalculate}
+        />
       </ScrollView>
     )
   }

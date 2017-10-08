@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {
-  View
-} from 'react-native';
-import {
-  Text,
-  Icon
-} from 'react-native-elements';
+import { View } from 'react-native';
+import { Text, Icon } from 'react-native-elements';
 import colors from 'Colors';
 
 export default class Title extends Component {

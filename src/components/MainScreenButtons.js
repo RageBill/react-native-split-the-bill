@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Alert
-} from 'react-native';
-import {
-  Button,
-  Text,
-  Icon
-} from 'react-native-elements';
+import { View, Alert } from 'react-native';
+import { Button, Text, Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 import RNExitApp from 'react-native-exit-app';
 import colors from 'Colors';
