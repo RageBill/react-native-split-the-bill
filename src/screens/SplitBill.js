@@ -10,10 +10,7 @@ import {
 import SplitInputs from '../components/SplitInputs';
 import SplitResults from '../components/SplitResults';
 import { StackNavigator } from 'react-navigation';
-
-// Colors
-const primary1 = '#FFFFFF'; // White
-const primary2 = '#6296F9'; // Blue
+import colors from 'Colors';
 
 export default class SplitBill extends Component {
 
@@ -32,9 +29,9 @@ export default class SplitBill extends Component {
   
   static navigationOptions = ({navigation}) => ({
     title: 'Splitting The Bill',
-    headerRight: <Icon name='dollar-bill' color={primary1} type='foundation' containerStyle={{ paddingRight: 10, backgroundColor: primary2 }}/>,
-    headerTintColor: primary1,
-    headerStyle: { backgroundColor: primary2 }
+    headerRight: <Icon name='dollar-bill' color={colors.primary1} type='foundation' containerStyle={{ paddingRight: 10, backgroundColor: colors.primary2 }}/>,
+    headerTintColor: colors.primary1,
+    headerStyle: { backgroundColor: colors.primary2 }
   })
 
   render(){
@@ -51,16 +48,16 @@ const styles = StyleSheet.create({
   // Outermost container
   container: {
     flex: 1,
-    backgroundColor: primary1,
+    backgroundColor: colors.primary1,
   },
   // Container for inputs for splitting bill
   splitInputs: {
     flex: 1,
-    backgroundColor: primary1,
+    backgroundColor: colors.primary1,
   },
   // Container for showing results
   results: {
     flex: 1,
-    backgroundColor: primary1,
+    backgroundColor: colors.primary1,
   }
 });

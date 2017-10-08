@@ -8,6 +8,7 @@ import {
   Button,
   PricingCard
 } from 'react-native-elements';
+import colors from 'Colors';
 
 export default class SplitResults extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class SplitResults extends Component {
   	return(
   	  <View style={this.props.style}>
   	    <PricingCard
-  	      color='#4F9DEB'
+  	      color={colors.cardColor}
   	      title='Each Person Pays'
   	      price={'$' + eachPay}
   	      info={[

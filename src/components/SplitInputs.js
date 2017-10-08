@@ -10,6 +10,7 @@ import {
   FormValidationMessage,
   Button
 } from 'react-native-elements';
+import colors from 'Colors';
 
 export default class SplitInputs extends Component {
 
@@ -28,9 +29,6 @@ export default class SplitInputs extends Component {
 
   render(){
     const handleSubmit = this.props.handleSubmit;
-    const normalColor_1 = '#009688'; // Color for first row
-    const normalColor_2 = '#FF9800'; // Color for second row
-    const errorColor = '#E14329'; // Color when error occurs
 
   	return(
       <View style={this.props.style}>
@@ -39,19 +37,19 @@ export default class SplitInputs extends Component {
             <Icon
               raised
               reverse
-              color={normalColor_1}
+              color={colors.normalColor_1}
               name='dollar'
               type='foundation'
             />
           </View>
           <View style={styles.inputs}>
-            <FormLabel labelStyle={{color: this.state.error1? errorColor : normalColor_1}}>Amount To Split</FormLabel>
+            <FormLabel labelStyle={{color: this.state.error1? colors.errorColor : colors.normalColor_1}}>Amount To Split</FormLabel>
             <FormInput 
               defaultValue={this.state.amount}
-              inputStyle={{color: this.state.error1? errorColor: normalColor_1}}
+              inputStyle={{color: this.state.error1? colors.errorColor: colors.normalColor_1}}
               keyboardType={'numeric'}
-              selectionColor={this.state.error1? errorColor: normalColor_1}
-              underlineColorAndroid={this.state.error1? errorColor : normalColor_1}
+              selectionColor={this.state.error1? colors.errorColor: colors.normalColor_1}
+              underlineColorAndroid={this.state.error1? colors.errorColor : colors.normalColor_1}
               onChangeText={(amount) => {
                 if(amount >= 0){
                   this.setState({amount: amount, error1: false});
@@ -63,7 +61,7 @@ export default class SplitInputs extends Component {
             />
             <FormValidationMessage 
               containerStyle={{display: this.state.error1? 'flex' : 'none'}}
-              labelStyle={{color: this.state.error1? errorColor : normalColor_1}}
+              labelStyle={{color: this.state.error1? colors.errorColor : colors.normalColor_1}}
             >
               {'Amount has to be non-negative number.'}
             </FormValidationMessage>
@@ -74,19 +72,19 @@ export default class SplitInputs extends Component {
             <Icon
               raised
               reverse
-              color={normalColor_2}
+              color={colors.normalColor_2}
               name='users'
               type='font-awesome'
             />
           </View>
           <View style={styles.inputs}>
-            <FormLabel labelStyle={{color: this.state.error2? errorColor : normalColor_2}}>Number of People</FormLabel>
+            <FormLabel labelStyle={{color: this.state.error2? colors.errorColor : colors.normalColor_2}}>Number of People</FormLabel>
             <FormInput 
               defaultValue={this.state.people}
-              inputStyle={{color: this.state.error2? errorColor: normalColor_2}}
+              inputStyle={{color: this.state.error2? colors.errorColor: colors.normalColor_2}}
               keyboardType={'numeric'}
-              selectionColor={this.state.error2? errorColor: normalColor_2}
-              underlineColorAndroid={this.state.error2? errorColor : normalColor_2}
+              selectionColor={this.state.error2? colors.errorColor: colors.normalColor_2}
+              underlineColorAndroid={this.state.error2? colors.errorColor : colors.normalColor_2}
               onChangeText={(people) => {
                 if(people >= 1 || people == ''){
                   this.setState({people: people, error2: false});
@@ -98,7 +96,7 @@ export default class SplitInputs extends Component {
             />
             <FormValidationMessage 
               containerStyle={{display: this.state.error2? 'flex' : 'none'}}
-              labelStyle={{color: this.state.error2? errorColor : normalColor_2}}
+              labelStyle={{color: this.state.error2? colors.errorColor : colors.normalColor_2}}
             >
               {'Number of people has to be positive number.'}
             </FormValidationMessage>
