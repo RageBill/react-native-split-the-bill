@@ -9,6 +9,7 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.48.4",
+		"react-native-animatable": "^1.2.4",
 		"react-native-elements": "^0.17.0",
 		"react-native-exit-app": "^1.0.0",
 		"react-native-md-textinput": "^2.0.4",
