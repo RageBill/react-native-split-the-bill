@@ -6,11 +6,11 @@ import SplitInputs from '../components/SplitInputs';
 import SplitResults from '../components/SplitResults';
 import colors from 'Colors';
 
-export default class SplitBill extends Component {
+export default class SplitBillScreen extends Component {
 
   // Navigation options for this page
   static navigationOptions = ({navigation}) => ({
-    title: 'Splitting The Bill',
+    title: 'Split Bill',
     headerRight: <Icon name='dollar-bill' color={colors.primary1} type='foundation' containerStyle={{ paddingRight: 10, backgroundColor: colors.primary2 }}/>,
     headerTintColor: colors.primary1,
     headerStyle: { backgroundColor: colors.primary2 }

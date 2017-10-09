@@ -68,7 +68,7 @@ export default class SplitResults extends Component {
       btnEasing = 'ease-out';
       btnIterationCount = 1;
       btnOnAnimationEnd = this.hideButtonContainer;
-      btnDuration = 500;
+      btnDuration = 200;
     }
 
     // Object supplied to button's animation
@@ -83,7 +83,7 @@ export default class SplitResults extends Component {
     // Default attributes for result card animation
     let cardAnimation = '';
     let cardOnAnimationEnd = null;
-    let cardDuration = 1000;
+    let cardDuration = 400;
 
     // When calculate button is clicked and card is being displayed
     if(btnHidden && !cardHidden){
@@ -93,7 +93,7 @@ export default class SplitResults extends Component {
     // When done button is clicked and then card fades out
     if(!cardHidden && !showResult){
       cardAnimation = 'fadeOutDown';
-      cardDuration = 500;
+      cardDuration = 200;
       cardOnAnimationEnd = this.hideResultCard;
     }
 
