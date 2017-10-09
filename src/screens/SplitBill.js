@@ -33,6 +33,11 @@ export default class SplitBill extends Component {
     this.setState({calculate: true});
   }
 
+  // Done button pressed for calculation
+  doneCalculate = () => {
+    this.setState({calculate: false});
+  }
+
   // State changes when input for amount changes
   onAmountInput = (amount) => {
     if(amount >= 0){
@@ -49,11 +54,6 @@ export default class SplitBill extends Component {
     } else {
       this.setState({people: people, error2: true, calculate: false});
     }
-  }
-
-  // Done button pressed for calculation
-  doneCalculate = () => {
-    this.setState({calculate: false});
   }
 
   render(){

@@ -10,33 +10,40 @@ export default class SplitResults extends Component {
 
     this.state = {
       ...props.info,
-      hideButtonContainer: false // whether button is showing
+      buttonHidden: false, // whether button is hidden
+      cardHidden: true // whether result card is hidden
     };
   }
 
   // Unhide button when inputs change
   componentWillReceiveProps(nextProps) {
-  	this.setState({...nextProps.info, hideButtonContainer: false});
+  	this.setState({...nextProps.info, buttonHidden: this.state.buttonHidden, cardHidden: this.state.cardHidden});
   }
 
   // Hiding button after submit
   hideButtonContainer = () => {
-    this.setState({hideButtonContainer: true});
+    this.setState({buttonHidden: true, cardHidden: false});
+  }
+
+  // Hiding result card after done
+  hideResultCard = () => {
+    this.setState({buttonHidden: false, cardHidden: true});
   }
 
   render(){
     const showResult = this.state.calculate;
-    const hideButton = this.state.hideButtonContainer;
+    const btnHidden = this.state.buttonHidden;
+    const cardHidden = this.state.cardHidden;
     const handleSubmit = this.props.handleSubmit;
     const doneCalculate = this.props.doneCalculate;
 
     // Calculating results to be shown
-  	const amount = this.state.calculate? this.state.amount : 0;
-  	const people = this.state.calculate? this.state.people : 0;
-  	const eachPay = this.state.calculate? Math.ceil(amount / people * 10) / 10 : 0; // 1 decimal place
-  	const totalPaid = this.state.calculate? Math.ceil(eachPay * people * 10) / 10 : 0; // 1 decimal place
-  	const grossChange = this.state.calculate? eachPay * people - amount : 0;
-  	const change = this.state.calculate? Math.round(grossChange * 10) / 10 : 0; // 1 decimal place
+  	const amount = this.state.amount || 0;
+  	const people = this.state.people || 0;
+  	const eachPay = Math.ceil(amount / people * 10) / 10 || 0; // 1 decimal place
+  	const totalPaid = Math.ceil(eachPay * people * 10) / 10 || 0; // 1 decimal place
+  	const grossChange = eachPay * people - amount || 0;
+  	const change = Math.round(grossChange * 10) / 10 || 0; // 1 decimal place
 
     // Check if the button should be enabled
     const btnEnabled = this.state.amount && this.state.people && !this.state.error1 && !this.state.error2;
@@ -48,18 +55,20 @@ export default class SplitResults extends Component {
     let btnOnAnimationEnd = null;
     let btnDuration = 1000;
 
-    // Animation attributes when button is awaiting to be pressed
-    if(btnEnabled){
+    // When button is awaiting to be pressed
+    if(btnEnabled && !showResult && cardHidden && !btnHidden){
       btnAnimation = 'pulse';
       btnEasing = 'ease-out';
       btnIterationCount = 'infinite';
     }
 
-    if(btnEnabled && showResult){
-      btnAnimation = 'fadeOut';
+    // When calculate button is pressed and then fade out
+    if(btnEnabled && showResult && cardHidden && !btnHidden){
+      btnAnimation = 'bounceOut';
       btnEasing = 'ease-out';
       btnIterationCount = 1;
       btnOnAnimationEnd = this.hideButtonContainer;
+      btnDuration = 500;
     }
 
     // Object supplied to button's animation
@@ -73,44 +82,33 @@ export default class SplitResults extends Component {
 
     // Default attributes for result card animation
     let cardAnimation = '';
-    let cardDelay = btnDuration; // card appears after button disappeared
+    let cardOnAnimationEnd = null;
+    let cardDuration = 1000;
 
-    if(hideButton){
-      cardAnimation = 'fadeIn';
+    // When calculate button is clicked and card is being displayed
+    if(btnHidden && !cardHidden){
+      cardAnimation = 'fadeInUpBig';
+    }
+
+    // When done button is clicked and then card fades out
+    if(!cardHidden && !showResult){
+      cardAnimation = 'fadeOutDown';
+      cardDuration = 500;
+      cardOnAnimationEnd = this.hideResultCard;
     }
 
     // Object supplied to card's animation
     const cardAnimationAttr = {
       animation: cardAnimation,
-      delay: cardDelay
-    }
-
-
-    // Custom animation for fading out
-    const fadeOut = {
-      from: {
-        opacity: 1
-      },
-      to: {
-        opacity: 0
-      }
-    }
-
-    // Custom animation for fading in
-    const fadeIn = {
-      from: {
-        opacity: 0
-      },
-      to: {
-        opacity: 1
-      }
+      onAnimationEnd: cardOnAnimationEnd,
+      duration: cardDuration
     }
 
   	return(
   	  <View style={this.props.style}>
         {/* Only show button if not showing result already */}
         <Animatable.View 
-          style={ hideButton? {display: 'none'} : styles.submit }
+          style={ btnHidden? {display: 'none'} : styles.submit }
           {...btnAnimationAttr}
         >
           {/* Submit Button */}
@@ -127,7 +125,7 @@ export default class SplitResults extends Component {
         </Animatable.View>
         {/* Card for displaying results */}
         <Animatable.View 
-          style={{ display: hideButton? 'flex' : 'none'}}
+          style={{ display: cardHidden? 'none' : 'flex'}}
           {...cardAnimationAttr}
         >
           <PricingCard
@@ -139,7 +137,6 @@ export default class SplitResults extends Component {
               'Change: $' + change,
             ]}
             button={{title: 'Done', icon: 'check'}}
-            containerStyle={{display: showResult? 'flex' : 'none'}}
             onButtonPress={() => doneCalculate()}
           />
         </Animatable.View>
