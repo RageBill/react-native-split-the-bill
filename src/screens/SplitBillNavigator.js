@@ -9,6 +9,11 @@ import colors from 'Colors';
 const SplitBillNavigator = TabNavigator({
   SplitBill: { screen: SplitBillScreen },
   ServiceCharge: { screen: ServiceChargeScreen },
+},
+{
+  tabBarOptions: {
+    tabStyle: { backgroundColor: colors.primary3 }
+  }
 });
 
 export default SplitBillNavigator;

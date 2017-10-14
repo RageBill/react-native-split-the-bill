@@ -13,6 +13,7 @@
 		"react-native-elements": "^0.17.0",
 		"react-native-exit-app": "^1.0.0",
 		"react-native-md-textinput": "^2.0.4",
+		"react-native-switch": "^1.1.2",
 		"react-native-vector-icons": "^4.4.0",
 		"react-navigation": "^1.0.0-beta.13",
 		"react-redux": "^5.0.6",
