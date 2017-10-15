@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 import SplitInputs from '../components/SplitInputs';
-import SplitResults from '../components/SplitResults';
+import AnimatedResult from '../components/AnimatedResult'
 import colors from 'Colors';
 
 export default class SplitBillScreen extends Component {
@@ -24,39 +24,40 @@ export default class SplitBillScreen extends Component {
       error2: false, // Error for number of people
       amount: '', // Amount of bill to split
       people: '', // Number of people to split amongst
-      calculate: false // Whether to calculate and show the result
     };
-  }
-
-  // Handling submit button click
-  handleSubmit = () => {
-    this.setState({calculate: true});
-  }
-
-  // Done button pressed for calculation
-  doneCalculate = () => {
-    this.setState({calculate: false});
   }
 
   // State changes when input for amount changes
   onAmountInput = (amount) => {
     if(amount >= 0){
-      this.setState({amount: amount, error1: false, calculate: false});
+      this.setState({amount: amount, error1: false});
     } else {
-      this.setState({amount: amount, error1: true, calculate: false});
+      this.setState({amount: amount, error1: true});
     }
   }
 
   // State changes when input for number of people changes
   onPeopleInput = (people) => {
     if(people >= 1 || people == ''){
-      this.setState({people: people, error2: false, calculate: false});
+      this.setState({people: people, error2: false});
     } else {
-      this.setState({people: people, error2: true, calculate: false});
+      this.setState({people: people, error2: true});
     }
   }
 
   render(){
+
+    // Calculating results to be shown
+    const amount = this.state.amount || 0;
+    const people = this.state.people || 0;
+    const eachPay = Math.ceil(amount / people * 10) / 10 || 0; // 1 decimal place
+    const totalPaid = Math.ceil(eachPay * people * 10) / 10 || 0; // 1 decimal place
+    const grossChange = eachPay * people - amount || 0;
+    const change = Math.round(grossChange * 10) / 10 || 0; // 1 decimal place
+
+    // Check if the button should be enabled
+    const btnEnabled = this.state.amount && this.state.people && !this.state.error1 && !this.state.error2;
+
   	return(
   	  <ScrollView style={styles.container}>
         <SplitInputs 
@@ -65,11 +66,15 @@ export default class SplitBillScreen extends Component {
           onAmountInput={this.onAmountInput} 
           onPeopleInput={this.onPeopleInput}
         />
-        <SplitResults 
-          style={styles.results} 
-          info={this.state}
-          handleSubmit={this.handleSubmit}
-          doneCalculate={this.doneCalculate}
+        <AnimatedResult
+          display={styles.results}
+          btnEnabled={btnEnabled}
+          cardTitle={'Each Person Pays'}
+          result={eachPay}
+          info={[
+            'Total Paid: $' + totalPaid,
+            'Change: $' + change,
+          ]}
         />
       </ScrollView>
     )
