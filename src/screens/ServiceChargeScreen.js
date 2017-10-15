@@ -66,10 +66,10 @@ export default class ServiceChargeScreen extends Component {
             containerStyle={styles.switchToggle}
             value={false}
             onValueChange={(value) => this.toggleServiceCharge(value) }
-            activeText={'Y'}
-            inActiveText={'N'}
+            activeText={''}
+            inActiveText={''}
             backgroundActive={'green'}
-            backgroundInactive={'grey'}
+            backgroundInactive={'red'}
           />
         </View>
         {/* Bottom Result Container */}

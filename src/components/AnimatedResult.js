@@ -25,7 +25,7 @@
   3. (number) result --> text for result card's main result
   4. (array) info --> for result card's small text
   5. [optional](style object) display --> style for outer container
-  
+
 */
 
 import React, { Component } from 'react';
@@ -63,6 +63,13 @@ export default class AnimatedResult extends Component {
   // Hiding result card after done
   hideResultCard = () => {
     this.setState({buttonHidden: false, cardHidden: true});
+  }
+
+  // If the result is shown and the result is changed
+  componentWillReceiveProps(nextProps) {
+    if(!this.state.cardHidden && (this.props.result != nextProps.result || this.props.info != nextProps.info)){
+      this.doneCalculate();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {

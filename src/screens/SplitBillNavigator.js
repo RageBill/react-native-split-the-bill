@@ -12,7 +12,12 @@ const SplitBillNavigator = TabNavigator({
 },
 {
   tabBarOptions: {
-    tabStyle: { backgroundColor: colors.primary3 }
+    tabStyle: {
+      backgroundColor: colors.primary3,
+    },
+    labelStyle: {
+      color: colors.primary1,
+    }
   }
 });
 
